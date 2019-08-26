@@ -1,9 +1,11 @@
-package ericdiaz.program.geniusplazacodingchallenge;
+package ericdiaz.program.geniusplazacodingchallenge.view;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import ericdiaz.program.geniusplazacodingchallenge.R;
 
 public class ViewUsersActivity extends AppCompatActivity {
 
