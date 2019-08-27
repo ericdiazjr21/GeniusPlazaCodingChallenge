@@ -5,12 +5,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.UsersResponse;
 import ericdiaz.program.geniusplazacodingchallenge.network.RetrofitServiceGenerator;
 import ericdiaz.program.geniusplazacodingchallenge.network.UserService;
 
 public class RepositoryTest {
-
+    private static final String TAG = "RepositoryTest";
     private UserService userService;
 
     @Before
@@ -42,6 +43,23 @@ public class RepositoryTest {
 
         //then
         Assert.assertEquals(expectedUserEmail, usersResponse.getUsers().get(2).getEmailAddress());
+    }
+
+    @Test
+    public void testCreatingUserWithNewUser() {
+        //given
+        final NewUser testUser = new NewUser(0, "test@gmail.com", "cire", "zaid", null);
+
+        //when
+        NewUser newUserResponse = userService.createUser(
+          testUser.getEmailAddress(),
+          testUser.getFirstName(),
+          testUser.getLastName())
+          .blockingGet();
+
+        //then
+        Assert.assertEquals(newUserResponse.getFirstName(), testUser.getFirstName());
+        Assert.assertEquals(newUserResponse.getTimeCreated().substring(0, 10), java.time.LocalDate.now().toString());
     }
 
 
