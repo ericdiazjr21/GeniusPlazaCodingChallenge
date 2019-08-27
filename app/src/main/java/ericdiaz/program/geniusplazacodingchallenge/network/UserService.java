@@ -15,5 +15,5 @@ import retrofit2.http.Query;
 public interface UserService {
 
     @GET("api/users")
-    Flowable<UsersResponse> getUsers(@Query("page") int page);
+    Flowable<UsersResponse> getUsers(@Query("page") int pageNumber);
 }
