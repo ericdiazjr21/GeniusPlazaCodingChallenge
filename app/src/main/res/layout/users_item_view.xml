@@ -15,16 +15,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_8dp"
+            android:contentDescription="@string/user_picture_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/user_picture_description" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/user_first_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@id/user_last_name_text_view"
+            android:textSize="@dimen/text_size_32sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_picture_image_view" />
 
@@ -33,9 +34,10 @@
             android:id="@+id/user_last_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_32sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/user_first_name_text_view"
-            app:layout_constraintTop_toBottomOf="@id/user_picture_image_view" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_first_name_text_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

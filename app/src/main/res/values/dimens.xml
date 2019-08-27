@@ -2,4 +2,5 @@
 <resources>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="elevation_4dp">4dp</dimen>
+    <dimen name="text_size_32sp">32sp</dimen>
 </resources>
