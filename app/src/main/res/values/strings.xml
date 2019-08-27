@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GeniusPlazaCodingChallenge</string>
+    <string name="user_picture_description">user profile pictures</string>
 </resources>

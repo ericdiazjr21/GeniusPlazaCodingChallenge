@@ -14,10 +14,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
 
     private User[] users;
 
-    public UsersAdapter(User[] users) {
-        this.users = users;
-    }
-
     @NonNull
     @Override
     public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +28,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
 
     @Override
     public int getItemCount() {
-        return users.length;
+        return users == null ? 0 : users.length;
+    }
+
+    public void setData(User[] users) {
+        this.users = users;
+        notifyDataSetChanged();
     }
 }
