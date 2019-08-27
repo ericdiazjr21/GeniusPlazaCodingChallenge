@@ -60,7 +60,7 @@ public class ViewUsersActivity extends AppCompatActivity implements PaginationMa
           .subscribe(usersResponse -> {
                 paginationManager.setTotalPages(usersResponse.getTotalPages());
                 paginationManager.updateNextPageNumber();
-                usersAdapter.setData(usersResponse.getUsers());
+                usersAdapter.addData(usersResponse.getUsers());
             },
             throwable -> Log.d(TAG, "accept: " + throwable.toString()),
             () -> Log.d(TAG, "run: Flowable complete"));

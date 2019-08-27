@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ericdiaz.program.geniusplazacodingchallenge.R;
 import ericdiaz.program.geniusplazacodingchallenge.model.User;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
 
-    private User[] users;
+    private final List<User> users = new ArrayList<>();
 
     @NonNull
     @Override
@@ -23,16 +26,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
-        holder.onBind(users[position]);
+        holder.onBind(users.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return users == null ? 0 : users.length;
+        return users.size();
     }
 
-    public void setData(User[] users) {
-        this.users = users;
-        notifyDataSetChanged();
+    public void addData(List<User> users) {
+        this.users.addAll(users);
+        notifyItemRangeInserted(this.users.size() - 1, users.size());
     }
 }
