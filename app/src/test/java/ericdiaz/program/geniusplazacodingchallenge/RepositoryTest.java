@@ -28,7 +28,7 @@ public class RepositoryTest {
         UsersResponse usersResponse = userService.getUsers(page).blockingFirst();
 
         //then
-        Assert.assertEquals(expectedUserFirstName, usersResponse.getUsers()[0].getFirstName());
+        Assert.assertEquals(expectedUserFirstName, usersResponse.getUsers().get(0).getFirstName());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class RepositoryTest {
         UsersResponse usersResponse = userService.getUsers(page).blockingFirst();
 
         //then
-        Assert.assertEquals(expectedUserEmail, usersResponse.getUsers()[2].getEmailAddress());
+        Assert.assertEquals(expectedUserEmail, usersResponse.getUsers().get(2).getEmailAddress());
     }
 
 

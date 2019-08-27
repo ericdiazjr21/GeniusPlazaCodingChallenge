@@ -2,6 +2,8 @@ package ericdiaz.program.geniusplazacodingchallenge.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public final class UsersResponse {
 
     @SerializedName("page")
@@ -17,9 +19,9 @@ public final class UsersResponse {
     private final int totalPages;
 
     @SerializedName("data")
-    private final User[] users;
+    private final List<User> users;
 
-    public UsersResponse(int pageNumber, int resultsPerPage, int totalResults, int totalPages, User[] users) {
+    public UsersResponse(int pageNumber, int resultsPerPage, int totalResults, int totalPages, List<User> users) {
         this.pageNumber = pageNumber;
         this.resultsPerPage = resultsPerPage;
         this.totalResults = totalResults;
@@ -43,7 +45,7 @@ public final class UsersResponse {
         return totalPages;
     }
 
-    public User[] getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 }
