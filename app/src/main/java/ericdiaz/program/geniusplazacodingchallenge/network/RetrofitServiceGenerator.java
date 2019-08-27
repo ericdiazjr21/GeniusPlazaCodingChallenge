@@ -28,4 +28,8 @@ public final class RetrofitServiceGenerator {
         }
         return singleInstance;
     }
+
+    public static UserService getUserService() {
+        return getRetrofit().create(UserService.class);
+    }
 }
