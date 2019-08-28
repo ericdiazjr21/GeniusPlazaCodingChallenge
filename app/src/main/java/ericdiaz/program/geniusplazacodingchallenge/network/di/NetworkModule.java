@@ -1,9 +1,10 @@
-package ericdiaz.program.geniusplazacodingchallenge.network;
+package ericdiaz.program.geniusplazacodingchallenge.network.di;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ericdiaz.program.geniusplazacodingchallenge.network.UserService;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

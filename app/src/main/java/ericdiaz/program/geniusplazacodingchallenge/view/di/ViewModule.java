@@ -1,4 +1,4 @@
-package ericdiaz.program.geniusplazacodingchallenge.view;
+package ericdiaz.program.geniusplazacodingchallenge.view.di;
 
 import javax.inject.Singleton;
 

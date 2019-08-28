@@ -3,6 +3,8 @@ package ericdiaz.program.geniusplazacodingchallenge.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +41,8 @@ public final class ViewUsersActivity extends AppCompatActivity
 
     @BindView(R.id.users_recycler_view)
     RecyclerView userRecyclerView;
+    @BindView(R.id.loading_progress_bar)
+    ProgressBar progressBar;
     @Inject
     UsersViewModel usersViewModel;
     @Inject
@@ -153,6 +157,7 @@ public final class ViewUsersActivity extends AppCompatActivity
           .observeOn(AndroidSchedulers.mainThread())
 
           .subscribe(usersResponse -> {
+                progressBar.setVisibility(View.GONE);
 
                 paginationManager.setTotalPages(usersResponse.getTotalPages());
 

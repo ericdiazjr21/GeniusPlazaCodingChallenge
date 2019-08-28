@@ -23,7 +23,7 @@ public final class UsersRepository {
     @Inject
     UserService userService;
 
-    UsersRepository(@NonNull final UserService userService) {
+    public UsersRepository(@NonNull final UserService userService) {
         this.userService = userService;
     }
 
