@@ -39,6 +39,10 @@ dependencies {
     // ViewModel for lifecycle-aware ViewModel implementation
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
 
+    // Butter Knife for field and method binding of view
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
     // Testing libraries
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

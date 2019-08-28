@@ -11,8 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ericdiaz.program.geniusplazacodingchallenge.R;
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.utils.PaginationManager;
@@ -31,29 +32,26 @@ import io.reactivex.schedulers.Schedulers;
  *
  * @author Eric Diaz
  */
-public class ViewUsersActivity extends AppCompatActivity
+public final class ViewUsersActivity extends AppCompatActivity
   implements PaginationManager.OnScrollReachedBottomListener {
 
-    private static final String TAG = "ViewUsersActivity";
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private UsersViewModel usersViewModel;
-    private RecyclerView userRecyclerView;
+    @BindView(R.id.users_recycler_view)
+    RecyclerView userRecyclerView;
     private UsersAdapter usersAdapter;
+    private UsersViewModel usersViewModel;
     private PaginationManager paginationManager;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private static final String TAG = "ViewUsersActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_users_layout);
-
+        ButterKnife.bind(this);
+        
         usersViewModel = new ViewModelProvider.NewInstanceFactory().create(UsersViewModel.class);
 
         paginationManager = new PaginationManager(this);
-
-        this.<FloatingActionButton>findViewById(R.id.add_user_fab).setOnClickListener(v -> {
-            Intent addUserIntent = new Intent(ViewUsersActivity.this, AddUserActivity.class);
-            startActivityForResult(addUserIntent, ViewConstants.ADD_USER_REQUEST_CODE);
-        });
 
         initializeRecyclerView();
 
@@ -104,8 +102,13 @@ public class ViewUsersActivity extends AppCompatActivity
         loadData(usersViewModel, paginationManager, usersAdapter);
     }
 
+    @OnClick(R.id.add_user_fab)
+    void startAddNewUserActivity() {
+        Intent addUserIntent = new Intent(ViewUsersActivity.this, AddUserActivity.class);
+        startActivityForResult(addUserIntent, ViewConstants.ADD_USER_REQUEST_CODE);
+    }
+
     private void initializeRecyclerView() {
-        userRecyclerView = findViewById(R.id.users_recycler_view);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         usersAdapter = new UsersAdapter();
         userRecyclerView.setAdapter(usersAdapter);
