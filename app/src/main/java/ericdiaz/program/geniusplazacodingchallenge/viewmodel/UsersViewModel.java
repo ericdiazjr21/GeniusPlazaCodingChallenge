@@ -1,10 +1,14 @@
 package ericdiaz.program.geniusplazacodingchallenge.viewmodel;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
+import ericdiaz.program.geniusplazacodingchallenge.model.User;
 import ericdiaz.program.geniusplazacodingchallenge.model.UsersResponse;
 import ericdiaz.program.geniusplazacodingchallenge.repository.UsersRepository;
+import ericdiaz.program.geniusplazacodingchallenge.utils.UserConverter;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 /**
  * A ViewModel for computation and relaying information between repository layer
@@ -25,5 +29,13 @@ public class UsersViewModel extends ViewModel {
 
     public Flowable<UsersResponse> getUsers(final int pageNumber) {
         return usersRepository.getUsers(pageNumber);
+    }
+
+    public Single<User> createUser(@NonNull final String email,
+                                   @NonNull final String firstName,
+                                   @NonNull final String lastName) {
+        return usersRepository.createUser(email, firstName, lastName)
+
+          .map(UserConverter::convertNewUserToSimpleUser);
     }
 }
