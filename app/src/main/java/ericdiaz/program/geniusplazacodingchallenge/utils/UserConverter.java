@@ -15,7 +15,7 @@ import ericdiaz.program.geniusplazacodingchallenge.model.User;
 
 public final class UserConverter {
 
-    public static final String DEFAULT_PROFILE_IMAGE_URL = "https://img.photobucket.com/albums/v16/FoxxLaverinth/random/cutieitachismall.jpg";
+    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://img.photobucket.com/albums/v16/FoxxLaverinth/random/cutieitachismall.jpg";
 
     private UserConverter() {
     }
@@ -24,7 +24,7 @@ public final class UserConverter {
         if (newUser != null) {
             return new User(newUser.getUserId(), newUser.getEmailAddress(), newUser.getFirstName(), newUser.getLastName(), DEFAULT_PROFILE_IMAGE_URL);
         } else {
-            return User.EMPTY_USER;
+            return User.Companion.getEMPTY_USER();
         }
     }
 }
