@@ -2,7 +2,9 @@ package ericdiaz.program.geniusplazacodingchallenge.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class NewUser{
+import java.io.Serializable;
+
+public final class NewUser implements Serializable {
 
     @SerializedName("id")
     private final int userId;
