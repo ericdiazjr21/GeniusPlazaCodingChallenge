@@ -2,9 +2,11 @@ package ericdiaz.program.geniusplazacodingchallenge.repository;
 
 import androidx.annotation.NonNull;
 
+import javax.inject.Inject;
+
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.UsersResponse;
-import ericdiaz.program.geniusplazacodingchallenge.network.RetrofitServiceGenerator;
+import ericdiaz.program.geniusplazacodingchallenge.network.UserService;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
@@ -18,13 +20,22 @@ import io.reactivex.Single;
 
 public final class UsersRepository {
 
+    @Inject
+    UserService userService;
+
+    public UsersRepository(@NonNull final UserService userService) {
+        this.userService = userService;
+    }
+
     public Flowable<UsersResponse> getUsers(final int pageNumber) {
-        return RetrofitServiceGenerator.getUserService().getUsers(pageNumber);
+
+        return userService.getUsers(pageNumber);
     }
 
     public Single<NewUser> createUser(@NonNull final String email,
                                       @NonNull final String firstName,
                                       @NonNull final String lastName) {
-        return RetrofitServiceGenerator.getUserService().createUser(email, firstName, lastName);
+
+        return userService.createUser(email, firstName, lastName);
     }
 }

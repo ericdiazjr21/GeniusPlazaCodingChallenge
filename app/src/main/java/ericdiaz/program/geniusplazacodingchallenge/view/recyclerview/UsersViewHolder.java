@@ -9,20 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ericdiaz.program.geniusplazacodingchallenge.R;
 import ericdiaz.program.geniusplazacodingchallenge.model.User;
 
 class UsersViewHolder extends RecyclerView.ViewHolder {
 
-    private ImageView userPictureImageView;
-    private TextView userFirstNameTextView;
-    private TextView userLastNameTextView;
+    @BindView(R.id.user_picture_image_view)
+    ImageView userPictureImageView;
+    @BindView(R.id.user_first_name_text_view)
+    TextView userFirstNameTextView;
+    @BindView(R.id.user_last_name_text_view)
+    TextView userLastNameTextView;
 
     UsersViewHolder(@NonNull View itemView) {
         super(itemView);
-        userPictureImageView = itemView.findViewById(R.id.user_picture_image_view);
-        userFirstNameTextView = itemView.findViewById(R.id.user_first_name_text_view);
-        userLastNameTextView = itemView.findViewById(R.id.user_last_name_text_view);
+        ButterKnife.bind(this, itemView);
     }
 
 

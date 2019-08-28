@@ -29,18 +29,6 @@ public final class UsersResponse {
         this.users = users;
     }
 
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
-    public int getResultsPerPage() {
-        return resultsPerPage;
-    }
-
-    public int getTotalResults() {
-        return totalResults;
-    }
-
     public int getTotalPages() {
         return totalPages;
     }
