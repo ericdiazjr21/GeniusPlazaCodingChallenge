@@ -20,7 +20,11 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * Activity for viewing existing users from network
+ * <p>
+ * Created: 8/26/19
  *
+ * @author Eric Diaz
  */
 public class ViewUsersActivity extends AppCompatActivity
   implements PaginationManager.OnScrollReachedBottomListener {
