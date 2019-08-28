@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GeniusPlazaCodingChallenge</string>
     <string name="user_picture_description">user profile pictures</string>
+    <string name="enter_first_name">Enter First Name</string>
+    <string name="enter_last_name">Enter Last Name</string>
+    <string name="enter_email_address">Enter Email Address</string>
+    <string name="create_user">Create User</string>
 </resources>
