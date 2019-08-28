@@ -26,10 +26,7 @@ public class ViewModelTest {
 
         //when
         User userResponse = usersViewModel
-          .createUser(
-            testNewUser.getEmailAddress(),
-            testNewUser.getFirstName(),
-            testNewUser.getLastName()).blockingGet();
+          .createUser(testNewUser).blockingGet();
 
         //then
         Assert.assertEquals(testNewUser.getFirstName(), userResponse.getFirstName());

@@ -89,7 +89,7 @@ public class ViewUsersActivity extends AppCompatActivity
                         .subscribe(user -> {
 
                               usersAdapter.addData(user);
-                              
+
                               userRecyclerView.scrollToPosition(0);
                           },
 
