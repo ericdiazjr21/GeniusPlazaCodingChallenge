@@ -3,6 +3,7 @@ package ericdiaz.program.geniusplazacodingchallenge.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
+import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.User;
 import ericdiaz.program.geniusplazacodingchallenge.model.UsersResponse;
 import ericdiaz.program.geniusplazacodingchallenge.repository.UsersRepository;
@@ -31,10 +32,12 @@ public class UsersViewModel extends ViewModel {
         return usersRepository.getUsers(pageNumber);
     }
 
-    public Single<User> createUser(@NonNull final String email,
-                                   @NonNull final String firstName,
-                                   @NonNull final String lastName) {
-        return usersRepository.createUser(email, firstName, lastName)
+    public Single<User> createUser(@NonNull final NewUser newUser) {
+        return usersRepository
+          .createUser(
+            newUser.getEmailAddress(),
+            newUser.getFirstName(),
+            newUser.getLastName())
 
           .map(UserConverter::convertNewUserToSimpleUser);
     }

@@ -79,10 +79,23 @@ public class ViewUsersActivity extends AppCompatActivity
                 NewUser newUser = (NewUser) data.getExtras().get(ViewConstants.NEW_USER);
 
                 if (newUser != null) {
-                    Log.d(TAG, "onActivityResult: " + newUser.toString());
+
+                    compositeDisposable.add(
+
+                      usersViewModel.createUser(newUser)
+
+                        .observeOn(AndroidSchedulers.mainThread())
+
+                        .subscribe(user -> {
+
+                              usersAdapter.addData(user);
+                              
+                              userRecyclerView.scrollToPosition(0);
+                          },
+
+                          throwable -> Log.d(TAG, "accept: " + throwable.toString())));
                 }
             }
-            //TODO: add new user to RecyclerView adapter and display
         }
     }
 

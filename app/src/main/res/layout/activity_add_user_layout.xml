@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_32dp"
         android:hint="@string/enter_first_name"
+        android:lines="1"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_32dp"
         android:hint="@string/enter_last_name"
+        android:lines="1"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_first_name_edit_text" />
@@ -31,6 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_32dp"
         android:hint="@string/enter_email_address"
+        android:lines="1"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_last_name_edit_text" />
