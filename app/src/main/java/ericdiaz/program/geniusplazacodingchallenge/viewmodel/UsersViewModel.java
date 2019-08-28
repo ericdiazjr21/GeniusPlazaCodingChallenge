@@ -1,7 +1,8 @@
 package ericdiaz.program.geniusplazacodingchallenge.viewmodel;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
+
+import javax.inject.Inject;
 
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.User;
@@ -20,12 +21,13 @@ import io.reactivex.Single;
  * @author Eric Diaz
  */
 
-public class UsersViewModel extends ViewModel {
+public class UsersViewModel {
 
-    private UsersRepository usersRepository;
+    @Inject
+    UsersRepository usersRepository;
 
-    public UsersViewModel() {
-        usersRepository = new UsersRepository();
+    public UsersViewModel(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 
     public Flowable<UsersResponse> getUsers(final int pageNumber) {

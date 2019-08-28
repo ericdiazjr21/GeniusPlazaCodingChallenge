@@ -29,10 +29,6 @@ public final class User {
         this.photoUrl = photoUrl;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
     public String getEmailAddress() {
         return emailAddress;
     }

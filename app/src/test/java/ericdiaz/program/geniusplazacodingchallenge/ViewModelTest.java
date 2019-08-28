@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Inject;
+
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.User;
 import ericdiaz.program.geniusplazacodingchallenge.utils.UserConverter;
@@ -11,12 +13,11 @@ import ericdiaz.program.geniusplazacodingchallenge.viewmodel.UsersViewModel;
 
 public class ViewModelTest {
 
+    @Inject
     private UsersViewModel usersViewModel;
-
 
     @Before
     public void setUp() {
-        usersViewModel = new UsersViewModel();
     }
 
     @Test

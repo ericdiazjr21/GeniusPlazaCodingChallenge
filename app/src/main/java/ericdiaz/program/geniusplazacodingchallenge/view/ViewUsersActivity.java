@@ -7,14 +7,16 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ericdiaz.program.geniusplazacodingchallenge.R;
+import ericdiaz.program.geniusplazacodingchallenge.di.DaggerAppComponent;
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.utils.PaginationManager;
 import ericdiaz.program.geniusplazacodingchallenge.view.constants.ViewConstants;
@@ -37,21 +39,23 @@ public final class ViewUsersActivity extends AppCompatActivity
 
     @BindView(R.id.users_recycler_view)
     RecyclerView userRecyclerView;
-    private UsersAdapter usersAdapter;
-    private UsersViewModel usersViewModel;
-    private PaginationManager paginationManager;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private static final String TAG = "ViewUsersActivity";
+    @Inject
+    UsersViewModel usersViewModel;
+    @Inject
+    UsersAdapter usersAdapter;
+    @Inject
+    PaginationManager paginationManager;
+    @Inject
+    CompositeDisposable compositeDisposable;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_users_layout);
         ButterKnife.bind(this);
-        
-        usersViewModel = new ViewModelProvider.NewInstanceFactory().create(UsersViewModel.class);
 
-        paginationManager = new PaginationManager(this);
+        DaggerAppComponent.builder().build().inject(this);
 
         initializeRecyclerView();
 
@@ -91,7 +95,7 @@ public final class ViewUsersActivity extends AppCompatActivity
                               userRecyclerView.scrollToPosition(0);
                           },
 
-                          throwable -> Log.d(TAG, "accept: " + throwable.toString())));
+                          throwable -> Log.d(ViewConstants.TAG, "accept: " + throwable.toString())));
                 }
             }
         }
@@ -110,7 +114,6 @@ public final class ViewUsersActivity extends AppCompatActivity
 
     private void initializeRecyclerView() {
         userRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        usersAdapter = new UsersAdapter();
         userRecyclerView.setAdapter(usersAdapter);
     }
 
@@ -122,6 +125,8 @@ public final class ViewUsersActivity extends AppCompatActivity
      */
 
     private void initializePaginationListener() {
+        paginationManager.setScrollListener(this);
+
         userRecyclerView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) ->
 
           compositeDisposable.add(Completable.fromAction(() ->
@@ -137,7 +142,7 @@ public final class ViewUsersActivity extends AppCompatActivity
             .subscribeOn(Schedulers.io())
 
             .subscribe(() -> {
-            }, throwable -> Log.d(TAG, "accept: " + throwable.toString()))));
+            }, throwable -> Log.d(ViewConstants.TAG, "accept: " + throwable.toString()))));
     }
 
     private void loadData(@NonNull final UsersViewModel usersViewModel,
@@ -153,8 +158,8 @@ public final class ViewUsersActivity extends AppCompatActivity
 
                 usersAdapter.addData(usersResponse.getUsers());
             },
-            throwable -> Log.d(TAG, "accept: " + throwable.toString()),
+            throwable -> Log.d(ViewConstants.TAG, "accept: " + throwable.toString()),
 
-            () -> Log.d(TAG, "run: Flowable complete")));
+            () -> Log.d(ViewConstants.TAG, "run: Flowable complete")));
     }
 }

@@ -5,6 +5,14 @@ import androidx.annotation.NonNull;
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.User;
 
+/**
+ * A Class to converter from NewUser Objects to User Objects
+ * <p>
+ * Created 8/28/19
+ *
+ * @author Eric Diaz
+ */
+
 public final class UserConverter {
 
     public static final String DEFAULT_PROFILE_IMAGE_URL = "https://img.photobucket.com/albums/v16/FoxxLaverinth/random/cutieitachismall.jpg";

@@ -5,18 +5,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.inject.Inject;
+
 import ericdiaz.program.geniusplazacodingchallenge.model.NewUser;
 import ericdiaz.program.geniusplazacodingchallenge.model.UsersResponse;
-import ericdiaz.program.geniusplazacodingchallenge.network.RetrofitServiceGenerator;
 import ericdiaz.program.geniusplazacodingchallenge.network.UserService;
 
 public class RepositoryTest {
     private static final String TAG = "RepositoryTest";
+
+    @Inject
     private UserService userService;
 
     @Before
     public void setUp() {
-        userService = RetrofitServiceGenerator.getUserService();
     }
 
     @Test

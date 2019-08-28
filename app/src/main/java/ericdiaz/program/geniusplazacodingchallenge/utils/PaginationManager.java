@@ -27,10 +27,9 @@ public final class PaginationManager {
     private int totalPages = 1;
     private int currentPageNumber = 1;
     private Disposable disposable;
-    private final OnScrollReachedBottomListener scrollListener;
+    private OnScrollReachedBottomListener scrollListener;
 
-    public PaginationManager(@NonNull final OnScrollReachedBottomListener scrollListener) {
-        this.scrollListener = scrollListener;
+    public PaginationManager() {
     }
 
     /**
@@ -68,6 +67,10 @@ public final class PaginationManager {
 
     public void setTotalPages(final int totalPages) {
         this.totalPages = totalPages;
+    }
+
+    public void setScrollListener(@NonNull final OnScrollReachedBottomListener scrollListener) {
+        this.scrollListener = scrollListener;
     }
 
     private void updateCurrentPageNumberToNext() {
