@@ -1,5 +1,6 @@
 package ericdiaz.program.geniusplazacodingchallenge.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,7 +11,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import ericdiaz.program.geniusplazacodingchallenge.R;
+import ericdiaz.program.geniusplazacodingchallenge.model.User;
 import ericdiaz.program.geniusplazacodingchallenge.utils.PaginationManager;
 import ericdiaz.program.geniusplazacodingchallenge.view.recyclerview.UsersAdapter;
 import ericdiaz.program.geniusplazacodingchallenge.viewmodel.UsersViewModel;
@@ -30,6 +34,7 @@ public class ViewUsersActivity extends AppCompatActivity
   implements PaginationManager.OnScrollReachedBottomListener {
 
     private static final String TAG = "ViewUsersActivity";
+    public static final int ADD_USER_REQUEST_CODE = 100;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private UsersViewModel usersViewModel;
     private RecyclerView userRecyclerView;
@@ -45,6 +50,11 @@ public class ViewUsersActivity extends AppCompatActivity
 
         paginationManager = new PaginationManager(this);
 
+        this.<FloatingActionButton>findViewById(R.id.add_user_fab).setOnClickListener(v -> {
+            Intent addUserIntent = new Intent(ViewUsersActivity.this, AddUserActivity.class);
+            startActivityForResult(addUserIntent, ADD_USER_REQUEST_CODE);
+        });
+
         initializeRecyclerView();
 
         initializePaginationListener();
@@ -57,6 +67,14 @@ public class ViewUsersActivity extends AppCompatActivity
         super.onDestroy();
         compositeDisposable.dispose();
         paginationManager.dispose();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            //TODO: add new user to RecyclerView adapter and display
+        }
     }
 
     @Override
