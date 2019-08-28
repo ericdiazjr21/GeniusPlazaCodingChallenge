@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public final class User {
 
+    public static final User EMPTY_USER = new User(0, "empty", "empty", "empty", "empty");
+
     @SerializedName("id")
     private final int userId;
 
