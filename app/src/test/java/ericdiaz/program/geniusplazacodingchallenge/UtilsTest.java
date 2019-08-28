@@ -18,6 +18,6 @@ public class UtilsTest {
         User converterResponse = UserConverter.convertNewUserToSimpleUser(testNewUser);
 
         //then
-        Assert.assertEquals(User.EMPTY_USER, converterResponse);
+        Assert.assertEquals(User.Companion.getEMPTY_USER(), converterResponse);
     }
 }
