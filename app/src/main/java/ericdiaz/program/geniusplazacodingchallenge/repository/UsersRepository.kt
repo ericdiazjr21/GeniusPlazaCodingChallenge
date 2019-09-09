@@ -15,8 +15,7 @@ import javax.inject.Inject
  * @author Eric Diaz
  */
 
-class UsersRepository(@field:Inject
-                      internal var userService: UserService) {
+class UsersRepository(@Inject val userService: UserService) {
 
     fun getUsers(pageNumber: Int): Flowable<UsersResponse> {
 
