@@ -48,8 +48,6 @@ public final class ViewUsersActivity extends AppCompatActivity
     @Inject
     UsersAdapter usersAdapter;
     @Inject
-    PaginationManager paginationManager;
-    @Inject
     CompositeDisposable compositeDisposable;
 
 
@@ -65,14 +63,13 @@ public final class ViewUsersActivity extends AppCompatActivity
 
         initializePaginationListener();
 
-        loadData(usersViewModel, paginationManager, usersAdapter);
+        loadData(usersViewModel, usersAdapter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         compositeDisposable.dispose();
-        paginationManager.dispose();
     }
 
     @Override
@@ -107,13 +104,14 @@ public final class ViewUsersActivity extends AppCompatActivity
 
     @Override
     public void loadMoreData() {
-        loadData(usersViewModel, paginationManager, usersAdapter);
+        loadData(usersViewModel, usersAdapter);
     }
 
     @OnClick(R.id.add_user_fab)
     void startAddNewUserActivity() {
-        Intent addUserIntent = new Intent(ViewUsersActivity.this, AddUserActivity.class);
-        startActivityForResult(addUserIntent, ViewConstants.ADD_USER_REQUEST_CODE);
+        startActivityForResult(
+          new Intent(this, AddUserActivity.class),
+          ViewConstants.ADD_USER_REQUEST_CODE);
     }
 
     private void initializeRecyclerView() {
@@ -129,13 +127,13 @@ public final class ViewUsersActivity extends AppCompatActivity
      */
 
     private void initializePaginationListener() {
-        paginationManager.setScrollListener(this);
+        usersViewModel.setPaginationManagerScrollListener(this);
 
         userRecyclerView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) ->
 
           compositeDisposable.add(Completable.fromAction(() ->
 
-            paginationManager.watchScrollPosition(
+            usersViewModel.watchScrollPosition(
 
               userRecyclerView.computeVerticalScrollExtent(),
 
@@ -143,23 +141,20 @@ public final class ViewUsersActivity extends AppCompatActivity
 
               userRecyclerView.computeVerticalScrollRange()))
 
-            .subscribeOn(Schedulers.io())
+            .subscribeOn(Schedulers.computation())
 
             .subscribe(() -> {
             }, throwable -> Log.d(ViewConstants.TAG, "accept: " + throwable.toString()))));
     }
 
     private void loadData(@NonNull final UsersViewModel usersViewModel,
-                          @NonNull final PaginationManager paginationManager,
                           @NonNull final UsersAdapter usersAdapter) {
-        compositeDisposable.add(usersViewModel.getUsers(paginationManager.getCurrentPageNumber())
+        compositeDisposable.add(usersViewModel.getUsers()
 
           .observeOn(AndroidSchedulers.mainThread())
 
           .subscribe(usersResponse -> {
                 progressBar.setVisibility(View.GONE);
-
-                paginationManager.setTotalPages(usersResponse.getTotalPages());
 
                 usersAdapter.addData(usersResponse.getUsers());
             },
